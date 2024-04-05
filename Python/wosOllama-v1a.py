@@ -13,7 +13,7 @@ async def make_request(url, data):
 
 
 async def main():
-    
+
     start_time = datetime.datetime.now()
 
     directory = os.path.join(os.getcwd(), "Python")
@@ -42,7 +42,7 @@ async def main():
     port = 11434
 
     model = "gemma:2b"
-    prompt = """Atue como um Desenvolvedor Sênior de Aplicações. Como usar o Delphi (da empresa Embarcadero) e o Python na versão 3 no mesmo Projeto?"""
+    prompt = """Quanto é a raiz quadrada de 49?"""
 
     # Dados da requisição
     url = f"http://{server}:{port}/api/generate"
@@ -64,7 +64,7 @@ async def main():
         },
     }
 
-    response_data = await make_request(url, data)
+    response = await make_request(url, data)
 
     end_time = datetime.datetime.now()
     execution_time = end_time - start_time
@@ -83,7 +83,7 @@ async def main():
         insert_table,
         (
             str(data),
-            str(response_data),
+            str(response),
             str(execution_time),
         ),
     )
@@ -92,7 +92,7 @@ async def main():
     connection.close()
 
     print("")
-    print(response_data["response"])
+    print(response["response"])
     print("")
     print(execution_time)
     print("")
